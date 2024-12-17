@@ -88,7 +88,9 @@ func Start(initDeps TgBotInitDependencies) (err error) {
 					fmt.Sprintf("You can only request your configs once per %d minutes", FloodWait),
 					userid,
 					&echotron.MessageOptions{
-						ReplyToMessageID: update.Message.ID,
+						ReplyParameters: echotron.ReplyParameters{
+							MessageID: update.Message.ID,
+						},
 					})
 				if err != nil {
 					log.Errorf("Failed to send telegram message. Error %v", err)
@@ -107,7 +109,9 @@ func Start(initDeps TgBotInitDependencies) (err error) {
 					messageText,
 					userid,
 					&echotron.MessageOptions{
-						ReplyToMessageID: update.Message.ID,
+						ReplyParameters: echotron.ReplyParameters{
+							MessageID: update.Message.ID,
+						},
 					})
 				if err != nil {
 					log.Errorf("Failed to send telegram message. Error %v", err)

@@ -1,11 +1,12 @@
 name: Build container images
 
 on:
-  push:
-    branches:
-      - "master"
-    tags:
-      - "*"
+  workflow_dispatch:
+#  push:
+#    branches:
+#      - "master"
+#    tags:
+#      - "*"
 
 jobs:
   build-image:
@@ -26,7 +27,7 @@ jobs:
       - name: Prepare image tags
         id: image-tags
         run: |
-          base=ngoduykhanh/wireguard-ui
+          base=rwillert/wireguard-ui
           app_version=dev
 
           ## Set git tag as image tag
@@ -82,10 +83,10 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and push
+      - name: Build # and push
         uses: docker/build-push-action@v5
         with:
-          push: true
+          push: false
           context: .
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           tags: ${{ steps.image-tags.outputs.container_images }}

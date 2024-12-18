@@ -1015,7 +1015,7 @@ func GlobalSettingSubmit(db store.IStore) echo.HandlerFunc {
 		c.Bind(&globalSettings)
 
 		// validate the input dns server list
-		if util.ValidateIPAddressList(globalSettings.DNSServers) == false {
+		if !util.ValidateIPAndSearchDomainAddressList(globalSettings.DNSServers) {
 			log.Warnf("Invalid DNS server list input from user: %v", globalSettings.DNSServers)
 			return c.JSON(http.StatusBadRequest, jsonHTTPResponse{false, "Invalid DNS server address"})
 		}

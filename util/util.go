@@ -25,6 +25,7 @@ import (
 	"github.com/skip2/go-qrcode"
 	"golang.org/x/mod/sumdb/dirhash"
 
+	"github.com/chmike/domain"
 	externalip "github.com/glendc/go-external-ip"
 	"github.com/labstack/gommon/log"
 	"github.com/ngoduykhanh/wireguard-ui/model"
@@ -117,10 +118,7 @@ func ContainsCIDR(ipnet1, ipnet2 *net.IPNet) bool {
 // ValidateCIDR to validate a network CIDR
 func ValidateCIDR(cidr string) bool {
 	_, _, err := net.ParseCIDR(cidr)
-	if err != nil {
-		return false
-	}
-	return true
+	return err == nil
 }
 
 // ValidateCIDRList to validate a list of network CIDR
@@ -128,12 +126,12 @@ func ValidateCIDRList(cidrs []string, allowEmpty bool) bool {
 	for _, cidr := range cidrs {
 		if allowEmpty {
 			if len(cidr) > 0 {
-				if ValidateCIDR(cidr) == false {
+				if !ValidateCIDR(cidr) {
 					return false
 				}
 			}
 		} else {
-			if ValidateCIDR(cidr) == false {
+			if !ValidateCIDR(cidr) {
 				return false
 			}
 		}
@@ -143,42 +141,45 @@ func ValidateCIDRList(cidrs []string, allowEmpty bool) bool {
 
 // ValidateAllowedIPs to validate allowed ip addresses in CIDR format
 func ValidateAllowedIPs(cidrs []string) bool {
-	if ValidateCIDRList(cidrs, false) == false {
-		return false
-	}
-	return true
+	return ValidateCIDRList(cidrs, false)
 }
 
 // ValidateExtraAllowedIPs to validate extra Allowed ip addresses, allowing empty strings
 func ValidateExtraAllowedIPs(cidrs []string) bool {
-	if ValidateCIDRList(cidrs, true) == false {
-		return false
-	}
-	return true
+	return ValidateCIDRList(cidrs, true)
 }
 
 // ValidateServerAddresses to validate allowed ip addresses in CIDR format
 func ValidateServerAddresses(cidrs []string) bool {
-	if ValidateCIDRList(cidrs, false) == false {
-		return false
-	}
-	return true
+	return ValidateCIDRList(cidrs, false)
 }
 
 // ValidateIPAddress to validate the IPv4 and IPv6 address
 func ValidateIPAddress(ip string) bool {
-	if net.ParseIP(ip) == nil {
-		return false
-	}
-	return true
+	return net.ParseIP(ip) != nil
 }
 
-// ValidateIPAddressList to validate a list of IPv4 and IPv6 addresses
-func ValidateIPAddressList(ips []string) bool {
-	for _, ip := range ips {
-		if ValidateIPAddress(ip) == false {
-			return false
+// ValidateDomainName to validate domain name
+func ValidateDomainName(name string) bool {
+	return domain.Check(name) == nil
+}
+
+// ValidateIPAndSearchDomainAddressList to validate a list of IPv4 and IPv6 addresses plus added search domains
+func ValidateIPAndSearchDomainAddressList(entries []string) bool {
+	ip := false
+	domain := false
+	for _, entry := range entries {
+		// ip but not after domain
+		if ValidateIPAddress(entry) && !domain {
+			ip = true
+			continue
 		}
+		// domain and after ip
+		if ValidateDomainName(entry) && ip {
+			domain = true
+			continue
+		}
+		return false
 	}
 	return true
 }

@@ -12,7 +12,7 @@ function renderClientList(data) {
 
         let telegramHtml = "";
         if (obj.Client.telegram_userid && obj.Client.telegram_userid.length > 0) {
-            telegramHtml = `<span class="info-box-text" style="display: none"><i class="fas fa-tguserid"></i>${obj.Client.telegram_userid}</span>`
+            telegramHtml = `<div style="display: none"><i class="fas fa-tguserid"></i>${obj.Client.telegram_userid}</div>`
         }
 
         // render client status css tag style
@@ -40,16 +40,16 @@ function renderClientList(data) {
 
         let additionalNotesHtml = "";
         if (obj.Client.additional_notes && obj.Client.additional_notes.length > 0) {
-            additionalNotesHtml = `<span class="info-box-text" style="display: none"><i class="fas fa-additional_notes"></i>${obj.Client.additional_notes.toUpperCase()}</span>`
+            additionalNotesHtml = `<div style="display: none"><i class="fas fa-additional_notes"></i>${obj.Client.additional_notes.toUpperCase()}</div>`
         }
 
         // render client html content
         let html = `<div class="col-sm-6 col-md-6 col-lg-4" id="client_${obj.Client.id}">
-                        <div class="info-box">
+                        <div class="card">
                             <div class="overlay" id="paused_${obj.Client.id}"` + clientStatusHtml
                                 + `<i class="paused-client fas fa-3x fa-play" onclick="resumeClient('${obj.Client.id}')"></i>
                             </div>
-                            <div class="info-box-content" style="overflow: hidden">
+                            <div class="card-header">
                                 <div class="btn-group">
                                     <a href="download?clientid=${obj.Client.id}" class="btn btn-outline-primary btn-sm">Download</a>
                                 </div>
@@ -81,24 +81,25 @@ function renderClientList(data) {
                                         data-clientname="${obj.Client.name}">Delete</a>
                                     </div>
                                 </div>
-                                <hr>
-                                <span class="info-box-text"><i class="fas fa-user"></i> ${obj.Client.name}</span>
-                                <span class="info-box-text" style="display: none"><i class="fas fa-key"></i> ${obj.Client.public_key}</span>
-                                <span class="info-box-text" style="display: none"><i class="fas fa-subnetrange"></i>${subnetRangesString}</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="info-box-text"><i class="fas fa-user"></i> ${obj.Client.name}</div>
+                                <div style="display: none"><i class="fas fa-key"></i> ${obj.Client.public_key}</div>
+                                <div style="display: none"><i class="fas fa-subnetrange"></i>${subnetRangesString}</div>
                                 ${telegramHtml}
                                 ${additionalNotesHtml}
-                                <span class="info-box-text"><i class="fas fa-envelope"></i> ${obj.Client.email}</span>
-                                <span class="info-box-text"><i class="fas fa-clock"></i>
-                                    ${prettyDateTime(obj.Client.created_at)}</span>
-                                <span class="info-box-text"><i class="fas fa-history"></i>
-                                    ${prettyDateTime(obj.Client.updated_at)}</span>
-                                <span class="info-box-text"><i class="fas fa-server" style="${obj.Client.use_server_dns ? "opacity: 1.0" : "opacity: 0.5"}"></i>
-                                    ${obj.Client.use_server_dns ? 'DNS enabled' : 'DNS disabled'}</span>
-                                <span class="info-box-text"><i class="fas fa-file"></i>
-                                    ${obj.Client.additional_notes}</span>
-                                <span class="info-box-text"><strong>IP Allocation</strong></span>`
+                                <div class="info-box-text"><i class="fas fa-envelope"></i> ${obj.Client.email}</div>
+                                <div class="info-box-text"><i class="fas fa-clock"></i>
+                                    ${prettyDateTime(obj.Client.created_at)}</div>
+                                <div class="info-box-text"><i class="fas fa-history"></i>
+                                    ${prettyDateTime(obj.Client.updated_at)}</div>
+                                <div class="info-box-text"><i class="fas fa-server" style="${obj.Client.use_server_dns ? "opacity: 1.0" : "opacity: 0.5"}"></i>
+                                    ${obj.Client.use_server_dns ? 'DNS enabled' : 'DNS disabled'}</div>
+                                <div class="info-box-text"><i class="fas fa-file"></i>
+                                    ${obj.Client.additional_notes}</div>
+                                <div class="info-box-text"><strong>IP Allocation</strong></div>`
                                 + allocatedIpsHtml
-                                + `<span class="info-box-text"><strong>Allowed IPs</strong></span>`
+                                + `<div class="info-box-text"><strong>Allowed IPs</strong></div>`
                                 + allowedIpsHtml
                             +`</div>
                         </div>
@@ -115,8 +116,8 @@ function renderUserList(data) {
 
         // render user html content
         let html = `<div class="col-sm-6 col-md-6 col-lg-4" id="user_${obj.username}">
-                        <div class="info-box">
-                            <div class="info-box-content">
+                        <div class="card">
+                            <div class="card-header">
                                 <div class="btn-group">
                                      <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#modal_edit_user" data-username="${obj.username}">Edit</button>
                                 </div>
@@ -124,9 +125,10 @@ function renderUserList(data) {
                                     <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal"
                                         data-target="#modal_remove_user" data-username="${obj.username}">Delete</button>
                                 </div>
-                                <hr>
-                                <span class="info-box-text"><i class="fas fa-user"></i> ${obj.username}</span>
-                                <span class="info-box-text"><i class="fas fa-terminal"></i> ${obj.admin? 'Administrator':'Manager'}</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="info-box-text"><i class="fas fa-user"></i> ${obj.username}</div>
+                                <div class="info-box-text"><i class="fas fa-terminal"></i> ${obj.admin? 'Administrator':'Manager'}</div>
                                 </div>
                         </div>
                     </div>`

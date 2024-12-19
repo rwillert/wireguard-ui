@@ -6,6 +6,7 @@ toolchain go1.23.4
 
 require (
 	github.com/NicoNex/echotron/v3 v3.39.0
+	github.com/chmike/domain v1.1.0
 	github.com/glendc/go-external-ip v0.1.0
 	github.com/gorilla/sessions v1.4.0
 	github.com/labstack/echo-contrib v0.17.1
@@ -25,7 +26,6 @@ require (
 )
 
 require (
-	github.com/chmike/domain v1.1.0 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/go-test/deep v1.1.0 // indirect

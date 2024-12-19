@@ -863,7 +863,7 @@ func WireGuardServerInterfaces(db store.IStore) echo.HandlerFunc {
 		if err := db.SaveServerInterface(serverInterface); err != nil {
 			return c.JSON(http.StatusInternalServerError, jsonHTTPResponse{false, "Interface IP address must be in CIDR format"})
 		}
-		log.Infof("Updated wireguard server interfaces settings: %v", serverInterface)
+		log.Infof("Updated wireguard server interfaces settings: %v", serverInterface.Addresses)
 
 		return c.JSON(http.StatusOK, jsonHTTPResponse{true, "Updated interface addresses successfully"})
 	}
@@ -1027,7 +1027,7 @@ func GlobalSettingSubmit(db store.IStore) echo.HandlerFunc {
 			return c.JSON(http.StatusInternalServerError, jsonHTTPResponse{false, "Cannot generate Wireguard key pair"})
 		}
 
-		log.Infof("Updated global settings: %v", globalSettings)
+		log.Infof("Updated global settings")
 
 		return c.JSON(http.StatusOK, jsonHTTPResponse{true, "Updated global settings successfully"})
 	}

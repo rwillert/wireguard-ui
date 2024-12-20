@@ -83,7 +83,7 @@
         if (nextURL && /(?:^\/[a-zA-Z_])|(?:^\/$)/.test(nextURL.trim())) {
             window.location.href = nextURL;
         } else {
-            window.location.href = '/{{.basePath}}';
+            window.location.href = '{{.basePath}}/';
         } 
     }
 </script>

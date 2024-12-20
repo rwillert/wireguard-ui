@@ -54,6 +54,7 @@ var (
 	flagBasePath                 string
 	flagSubnetRanges             string
 	flagVersion                  = false
+	flagProxy                    = false
 )
 
 const (
@@ -96,6 +97,7 @@ func init() {
 	flag.StringVar(&flagSubnetRanges, "subnet-ranges", util.LookupEnvOrString("SUBNET_RANGES", flagSubnetRanges), "IP ranges to choose from when assigning an IP for a client.")
 	flag.IntVar(&flagSessionMaxDuration, "session-max-duration", util.LookupEnvOrInt("SESSION_MAX_DURATION", flagSessionMaxDuration), "Max time in days a remembered session is refreshed and valid.")
 	flag.BoolVar(&flagVersion, "version", false, "Prints the app version.")
+	flag.BoolVar(&flagProxy, "proxy", util.LookupEnvOrBool("PROXY", flagProxy), "Behind a proxy. Use X-FORWARDED-FOR for failed login logging")
 
 	var (
 		smtpPasswordLookup   = util.LookupEnvOrString("SMTP_PASSWORD", flagSmtpPassword)
@@ -145,6 +147,7 @@ func init() {
 	util.WgConfTemplate = flagWgConfTemplate
 	util.BasePath = util.ParseBasePath(flagBasePath)
 	util.SubnetRanges = util.ParseSubnetRanges(flagSubnetRanges)
+	util.Proxy = flagProxy
 
 	lvl, _ := util.ParseLogLevel(util.LookupEnvOrString(util.LogLevel, "INFO"))
 

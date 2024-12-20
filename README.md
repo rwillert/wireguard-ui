@@ -74,6 +74,7 @@ docker-compose up
 | `TELEGRAM_TOKEN`              | Telegram bot token for distributing configs to clients                                                                                                                                                                                                                              | N/A                                |
 | `TELEGRAM_ALLOW_CONF_REQUEST` | Allow users to get configs from the bot by sending a message                                                                                                                                                                                                                        | `false`                            |
 | `TELEGRAM_FLOOD_WAIT`         | Time in minutes before the next conf request is processed                                                                                                                                                                                                                           | `60`                               |
+| `PROXY`                       | Use X-FORWARDED-FOR header for logging                                                                                                                                                    | `false`                               |
 
 ### Defaults for server configuration
 

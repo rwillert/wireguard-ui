@@ -64,7 +64,10 @@ func Login(db store.IStore) echo.HandlerFunc {
 		if err != nil {
 			return c.JSON(http.StatusBadRequest, jsonHTTPResponse{false, "Bad post data"})
 		}
-
+		ip := c.Request().RemoteAddr
+		if util.Proxy {
+			ip = c.Request().Header.Get("X-FORWARDED-FOR")
+		}
 		username := data["username"].(string)
 		password := data["password"].(string)
 		rememberMe := data["rememberMe"].(bool)
@@ -75,7 +78,7 @@ func Login(db store.IStore) echo.HandlerFunc {
 
 		dbuser, err := db.GetUserByName(username)
 		if err != nil {
-			log.Warnf("Invalid credentials. Cannot query user %s from DB (%s)", username, c.Request().RemoteAddr)
+			log.Warnf("Invalid credentials. Cannot query user %s from DB (%s)", username, ip)
 			return c.JSON(http.StatusInternalServerError, jsonHTTPResponse{false, "Invalid credentials"})
 		}
 
@@ -130,11 +133,11 @@ func Login(db store.IStore) echo.HandlerFunc {
 			cookie.SameSite = http.SameSiteLaxMode
 			c.SetCookie(cookie)
 
-			log.Infof("Logged in successfully user %s (%s)", username, c.Request().RemoteAddr)
+			log.Infof("Logged in successfully user %s (%s)", username, ip)
 			return c.JSON(http.StatusOK, jsonHTTPResponse{true, "Logged in successfully"})
 		}
 
-		log.Warnf("Invalid credentials user %s (%s)", username, c.Request().RemoteAddr)
+		log.Warnf("Invalid credentials user %s (%s)", username, ip)
 		return c.JSON(http.StatusUnauthorized, jsonHTTPResponse{false, "Invalid credentials"})
 	}
 }

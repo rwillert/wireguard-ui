@@ -28,6 +28,7 @@ var (
 	BasePath           string
 	SubnetRanges       map[string]([]*net.IPNet)
 	SubnetRangesOrder  []string
+	Proxy              bool
 )
 
 const (

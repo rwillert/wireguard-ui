@@ -1,5 +1,5 @@
-github.com/NicoNex/echotron/v3 v3.39.0 h1:DIOskt7z2oLt6uk3eyM09XJJzDsIJuRlJXZdoE/H/Zs=
-github.com/NicoNex/echotron/v3 v3.39.0/go.mod h1:7LvjveJmezuUOeaoA3nzQduNlSPQYfq219Z+baKY04Q=
+github.com/NicoNex/echotron/v3 v3.43.0 h1:efE2spw3mfU0Ev20m0PqqvgMSm0xHzgSxlWAEmC9RC4=
+github.com/NicoNex/echotron/v3 v3.43.0/go.mod h1:7LvjveJmezuUOeaoA3nzQduNlSPQYfq219Z+baKY04Q=
 github.com/chmike/domain v1.1.0 h1:615mGyA/ghxvIFBdAaYuB2azxAsUxrpm6Cv5UiL6VPo=
 github.com/chmike/domain v1.1.0/go.mod h1:h558M2qGKpYRUxHHNyey6puvXkZBjvjmseOla/d1VGQ=
 github.com/coreos/bbolt v1.3.1-coreos.6.0.20180223184059-4f5275f4ebbf/go.mod h1:iRUV2dpdMOn7Bo10OQBFzIJO9kkE559Wcmn+qkEiiKk=

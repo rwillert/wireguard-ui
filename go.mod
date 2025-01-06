@@ -5,7 +5,7 @@ go 1.23
 toolchain go1.23.4
 
 require (
-	github.com/NicoNex/echotron/v3 v3.39.0
+	github.com/NicoNex/echotron/v3 v3.43.0
 	github.com/chmike/domain v1.1.0
 	github.com/glendc/go-external-ip v0.1.0
 	github.com/gorilla/sessions v1.4.0

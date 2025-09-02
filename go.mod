@@ -18,8 +18,8 @@ require (
 	github.com/sendgrid/sendgrid-go v3.16.0+incompatible
 	github.com/skip2/go-qrcode v0.0.0-20200617195104-da1b6568686e
 	github.com/xhit/go-simple-mail/v2 v2.16.0
-	golang.org/x/crypto v0.38.0
-	golang.org/x/mod v0.22.0
+	golang.org/x/crypto v0.41.0
+	golang.org/x/mod v0.26.0
 	//golang.zx2c4.com/wireguard v0.0.20200121 // indirect
 	golang.zx2c4.com/wireguard/wgctrl v0.0.0-20230429144221-925a1e7659e6
 	gopkg.in/go-playground/validator.v9 v9.31.0
@@ -44,10 +44,10 @@ require (
 	github.com/toorop/go-dkim v0.0.0-20240103092955-90b7d1423f92 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasttemplate v1.2.2 // indirect
-	golang.org/x/net v0.40.0 // indirect
-	golang.org/x/sync v0.14.0 // indirect
-	golang.org/x/sys v0.33.0 // indirect
-	golang.org/x/text v0.25.0 // indirect
+	golang.org/x/net v0.42.0 // indirect
+	golang.org/x/sync v0.16.0 // indirect
+	golang.org/x/sys v0.35.0 // indirect
+	golang.org/x/text v0.28.0 // indirect
 	golang.org/x/time v0.11.0 // indirect
 	golang.zx2c4.com/wireguard v0.0.0-20231211153847-12269c276173 // indirect
 	gopkg.in/go-playground/assert.v1 v1.2.1 // indirect

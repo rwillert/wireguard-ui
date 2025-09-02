@@ -1,26 +1,39 @@
-run:
-  timeout: 5m
+version: "2"
 linters:
-  disable-all: true
+  default: none
   enable:
-    - gofmt
-    - revive
-    - goimports
     - govet
+    - misspell
+    - revive
     - unused
     - whitespace
-    - misspell
-  fast: false
-linters-settings:
-  gofmt:
-    simplify: false
-  revive:
-    rules:
-      - name: exported
-        disabled: true
-issues:
-  exclude-use-default: false
-  exclude-dirs:
-    - .github
-    - hack
-    - vendor
+  settings:
+    revive:
+      rules:
+        - name: exported
+          disabled: true
+  exclusions:
+    generated: lax
+    paths:
+      - .github
+      - hack
+      - vendor
+      - third_party$
+      - builtin$
+      - examples$
+formatters:
+  enable:
+    - gofmt
+    - goimports
+  settings:
+    gofmt:
+      simplify: false
+  exclusions:
+    generated: lax
+    paths:
+      - .github
+      - hack
+      - vendor
+      - third_party$
+      - builtin$
+      - examples$

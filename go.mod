@@ -1,8 +1,8 @@
 module github.com/rwillert/wireguard-ui
 
-go 1.23.0
+go 1.24.0
 
-toolchain go1.23.4
+toolchain go1.24.6
 
 require (
 	github.com/NicoNex/echotron/v3 v3.43.0

@@ -7,7 +7,7 @@ on:
 jobs:
   releases-matrix:
     name: Release Go Binary
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
@@ -45,7 +45,7 @@ jobs:
 
     # build and make the releases
     - name: Build and make the releases
-      uses: wangyoucao577/go-release-action@master
+      uses: rwillert/go-release-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         goos: ${{ matrix.goos }}
